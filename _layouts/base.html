@@ -20,7 +20,19 @@ common-js:
   <!-- Beautiful Jekyll | MIT license | Copyright Dean Attali 2016 -->
   {% include head.html %}
 
-  		<script>
+  
+
+  <body>
+  
+    {% include nav.html %}
+
+    {{ content }}
+
+    {% include footer.html %}
+  
+    {% include footer-scripts.html %}
+
+    		<script>
 
 			var group;
 			var container, controls, stats;
@@ -274,16 +286,6 @@ common-js:
 			}
 
 		</script>
-
-  <body>
-  
-    {% include nav.html %}
-
-    {{ content }}
-
-    {% include footer.html %}
-  
-    {% include footer-scripts.html %}
   
   </body>
 </html>
