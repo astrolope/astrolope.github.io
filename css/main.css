@@ -379,7 +379,7 @@ footer .theme-by {
 
 .three-header {
   width: 100%;
-  height: 150px;
+  height: 160px;
 }
 
 canvas {
@@ -389,7 +389,7 @@ canvas {
 }
 
 .intro-header {
-  margin: 40px 0 20px;
+  margin: 10px 0 20px;
   position: relative;
 }
 .intro-header.big-img {
