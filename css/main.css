@@ -99,8 +99,8 @@ img {
 /* --- Navbar --- */
 
 .navbar-custom {
-  background: #ffffff;
-  border-bottom: 1px solid #EAEAEA;
+  background: transparent;
+ 
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
