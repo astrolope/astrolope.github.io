@@ -101,8 +101,11 @@ img {
 
 /* --- Navbar --- */
 
+.navbar {
+  border: none;
+}
 .navbar-default {
-  border-color: none;
+  border: none !important;
 }
 .navbar-custom {
   background: transparent;
