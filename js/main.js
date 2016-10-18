@@ -155,12 +155,12 @@ var main = {
 			var rHalf = r / 2;
 
 			var effectController = {
-				showDots: true,
+				showDots: false,
 				showLines: true,
-				minDistance: 150,
+				minDistance: 120,
 				limitConnections: false,
 				maxConnections: 20,
-				particleCount: 500
+				particleCount: 250
 			};
 
 			init();
