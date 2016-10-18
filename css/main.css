@@ -101,6 +101,9 @@ img {
 
 /* --- Navbar --- */
 
+.navbar-default {
+  border-color: none;
+}
 .navbar-custom {
   background: transparent;
  
