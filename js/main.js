@@ -207,7 +207,7 @@ var main = {
 				helper.material.color.setHex( 0x080808 );
 				helper.material.blending = THREE.AdditiveBlending;
 				helper.material.transparent = true;
-				group.add( helper );
+				//group.add( helper );
 
 				var segments = maxParticleCount * maxParticleCount;
 
