@@ -26,7 +26,6 @@ a {
 }
 a:hover,
 a:focus {
-  color: #0085a1;
 }
 blockquote {
   color: #808080;
@@ -133,6 +132,7 @@ img {
 
   .navbar-custom.top-nav-short {
     padding: 0;
+    height: 0;
   }
 }
 
