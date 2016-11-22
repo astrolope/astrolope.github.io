@@ -3,7 +3,9 @@ layout: page
 title: " "
 
 ---
+<div class="columns">
 
+  <div class="column">
 <div class="posts-list">
   {% for post in paginator.posts %}
   <article class="post-preview">
@@ -44,6 +46,10 @@ title: " "
 
    </article>
   {% endfor %}
+</div>
+
+</div>
+
 </div>
 
 {% if paginator.total_pages > 1 %}
