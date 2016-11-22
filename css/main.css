@@ -285,23 +285,27 @@ footer .theme-by {
 
 /* --- Post preview --- */
 
+.blog-post {
+  background-color: #fff;
+  border: 1px solid #eee;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
 .columns {
   padding: 10px;
 }
 
 .post-preview {
-  margin-bottom: 10px;
   padding: 20px;
+  margin-bottom: 10px;
+  
   border: 1px solid #eee;
   border-radius: 5px;
   background-color: #fff;
 }
 
-@media only screen and (min-width: 768px) {
-  .post-preview {
-    padding: 35px 0;
-  }
-}
+
 
 .post-preview a {
   text-decoration: none;
@@ -317,11 +321,13 @@ footer .theme-by {
 .post-preview .post-title {
   font-size: 30px;
   margin-top: 0;
+  
 }
 .post-preview .post-subtitle {
   margin: 0;
   font-weight: 300;
   margin-bottom: 10px;
+  
 }
 .post-preview .post-meta,
 .post-heading .post-meta {
@@ -384,7 +390,6 @@ footer .theme-by {
 }
 
 canvas {
- 
   width: 100%;
   background-color: #fff;
   background-attachment: fixed;
@@ -402,8 +407,8 @@ canvas {
   position: relative;
   background-attachment: fixed;
 }
-.intro-header.big-img {
-  
+
+.intro-header.big-img {  
   background: no-repeat center center;
   background-attachment: fixed;
   -webkit-background-size: cover;
@@ -413,6 +418,7 @@ canvas {
   margin-top: 51px; /* The small navbar is 50px tall + 1px border */
   margin-bottom: 35px;
 }
+
 .intro-header.big-img  .big-img-transition {
   position: absolute;
   width: 100%;
