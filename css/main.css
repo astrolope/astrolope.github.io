@@ -384,11 +384,13 @@ canvas {
  
   width: 100%;
   background-color: #fff;
+  background-attachment: fixed;
 }
 
 .intro-header {
   margin: 10px 0 20px;
   position: relative;
+  background-attachment: fixed;
 }
 .intro-header.big-img {
   
