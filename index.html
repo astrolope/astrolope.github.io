@@ -3,9 +3,7 @@ layout: page
 title: " "
 
 ---
-<div class="columns">
 
-  <div class="column">
 <div class="posts-list">
   {% for post in paginator.posts %}
   <article class="post-preview">
@@ -21,7 +19,29 @@ title: " "
 
     <p class="post-meta">
       Posted on {{ post.date | date: "%B %-d, %Y" }}
+      
     </p>
+
+    <div class="post-image">
+      <img src ="{{post.bigimg}}">
+    </div>
+
+    {% if post.bigimg %}
+  <div id="header-big-imgs" data-num-img={% if post.bigimg.first %}{{ post.bigimg.size }}{% else %}1{% endif %}
+    {% for bigimg in post.bigimg %}
+	  {% assign imgnum = forloop.index %}
+	  {% for imginfo in bigimg %}
+	    {% if imginfo[0] %}
+		  data-img-src-{{ imgnum }}="{{ imginfo[0] | prepend: site.baseurl | replace: '//', '/' }}"
+		  data-img-desc-{{ imgnum }}="{{ imginfo[1] }}"
+		{% else %}
+		  data-img-src-{{ imgnum }}="{{ imginfo | prepend: site.baseurl | replace: '//', '/' }}"
+		{% endif %}
+	  {% endfor %}
+    {% endfor %}
+  ></div>
+{% endif %}
+
 
     <div class="post-entry">
       {{ post.excerpt | strip_html | xml_escape | truncatewords: site.excerpt_length }}
@@ -46,10 +66,6 @@ title: " "
 
    </article>
   {% endfor %}
-</div>
-
-</div>
-
 </div>
 
 {% if paginator.total_pages > 1 %}

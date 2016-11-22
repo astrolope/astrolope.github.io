@@ -285,20 +285,22 @@ footer .theme-by {
 
 /* --- Post preview --- */
 
-.post-preview {
-  padding: 20px 0;
-  border: 1px solid #eee;
+.columns {
+  padding: 10px;
+}
 
+.post-preview {
+  margin-bottom: 10px;
+  padding: 20px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  background-color: #fff;
 }
 
 @media only screen and (min-width: 768px) {
   .post-preview {
     padding: 35px 0;
   }
-}
-
-.post-preview:last-child {
-  border-bottom: 0;
 }
 
 .post-preview a {
@@ -378,6 +380,7 @@ footer .theme-by {
 .three-header {
   width: 100%;
   height: 310px;
+  background-attachment: fixed;
 }
 
 canvas {
@@ -385,6 +388,13 @@ canvas {
   width: 100%;
   background-color: #fff;
   background-attachment: fixed;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -9999;
 }
 
 .intro-header {
@@ -409,6 +419,7 @@ canvas {
   height: 100%;
   opacity: 0;
   background: no-repeat center center;
+  background-attachment: fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
