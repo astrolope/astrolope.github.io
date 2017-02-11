@@ -7,7 +7,7 @@ body {
 }
 
 canvas {
-    background: -webkit-linear-gradient(left top, #1B5758, #182F3F); /* For Safari 5.1 to 6.0 */
+  background: -webkit-linear-gradient(left top, #1B5758, #182F3F); /* For Safari 5.1 to 6.0 */
   background: -o-linear-gradient(bottom right, red, yellow); /* For Opera 11.1 to 12.0 */
   background: -moz-linear-gradient(bottom right, red, yellow); /* For Firefox 3.6 to 15 */
   background: linear-gradient(to bottom right, #1B5758, #182F3F); 
