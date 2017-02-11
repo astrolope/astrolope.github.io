@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 
 
-angular.module('starter', ['ionic'])
+angular.module('starter', ['ionic', 'ngAnimate'])
 
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
@@ -145,6 +145,7 @@ angular.module('starter', ['ionic'])
                 group2,
                 line,
                 SELECTED,
+                options, spawnerOptions, particleSystem, tick = 0,
                 
 
 
@@ -190,12 +191,14 @@ angular.module('starter', ['ionic'])
 
             var f, f2, f3, p, vertexIndex;
 
-            var particleTexture = THREE.ImageUtils.loadTexture('img/textures/particle.png');
+            var particleTexture = THREE.ImageUtils.loadTexture('img/particle.png');
 
             particleTexture.wrapS = THREE.RepeatWrapping;
             particleTexture.wrapT = THREE.RepeatWrapping;
             // 
 
+            var r = 30;
+			var rHalf = r / 2;
 
             var mouse = new THREE.Vector2();
 
@@ -583,7 +586,55 @@ angular.module('starter', ['ionic'])
 				 line = new THREE.Line( geometry, material );
 				 scene.add( line );
 
+                 particleSystem = new THREE.GPUParticleSystem({
+				maxParticles: 250000
+			});
+			scene.add( particleSystem);
+            console.log(particleSystem);
 
+            
+
+			// options passed during each spawned
+			options = {
+				position: new THREE.Vector3(),
+				positionRandomness: 2,
+				velocity: new THREE.Vector3(),
+				velocityRandomness: 1.46,
+				color: 0xaa88ff,
+				colorRandomness: 1,
+				turbulence: 1,
+				lifetime: 6.5,
+				size: 3,
+				sizeRandomness: 7
+			};
+
+			spawnerOptions = {
+				spawnRate: 2000,
+				horizontalSpeed: 2,
+				verticalSpeed: 1,
+				timeScale: 0.2
+			};
+
+            geometry = new THREE.SphereGeometry(5);
+                    var map = THREE.ImageUtils.loadTexture("img/particle2.png");
+                    material = new THREE.MeshLambertMaterial({ color: 0xffff00, fog: true });
+                    var sprite = new THREE.Mesh(geometry, material);
+
+                    sprite.position.x = 10.609461429726363;
+                    sprite.position.y = 9.909070246613313 - 2.75;
+                    sprite.position.z = -8.069557805948353;
+
+                    var scaleUniform = 5
+                    sprite.scale.x = scaleUniform;
+                    sprite.scale.y = scaleUniform;
+                    sprite.scale.z = scaleUniform;
+                    sprite.userData.connected = false;
+                    sprite.userData.age = Date.now();
+                    //stars.push(sprite);
+
+                    //scene.add(sprite);
+
+                    var direction = new THREE.Vector3();
 
 
                 radius = 200,
@@ -769,7 +820,7 @@ angular.module('starter', ['ionic'])
                 });
 
                 displaceRandomFace();
-                clock = new THREE.Clock();
+                clock = new THREE.Clock(true);
                 var startTime = Date.now();
                 animate();
             }
@@ -939,9 +990,11 @@ angular.module('starter', ['ionic'])
             };
 
             function animate() {
-
+                requestAnimationFrame(animate);
                 var dt = clock.getDelta();
                 //updateVertexSprings();
+
+               
 
                 raycaster.setFromCamera( mouse, camera );
 
@@ -994,7 +1047,7 @@ group2.geometry.attributes.position.needsUpdate = true;
                     playerPosition = group1.object.position;
                 }
 
-                detectCollisions();
+               
 
                 for (var i = 0; i < group2.geometry.attributes.uv.array.length; i++) {
                     group2.geometry.attributes.uv.array[i * 3] += 10 * dt;
@@ -1006,9 +1059,28 @@ group2.geometry.attributes.position.needsUpdate = true;
 
 
                 logoImg.style.transform = "rotate(" + elapsedSeconds * 25 + "deg)";
+                
+
+                var delta = clock.getDelta() * spawnerOptions.timeScale;
+			    tick += dt * spawnerOptions.timeScale;
+                if (tick < 0) tick = 0;
+
+			if (dt > 0) {
+				options.position.x = Math.sin(tick * spawnerOptions.horizontalSpeed) * 20;
+				options.position.y = Math.sin(tick * spawnerOptions.verticalSpeed) * 10;
+				options.position.z = Math.sin(tick * spawnerOptions.horizontalSpeed + spawnerOptions.verticalSpeed) * 5;
+
+                //console.log(options.position);
+				for (var x = 0; x < spawnerOptions.spawnRate * dt; x++) {
+					// Yep, that's really it.	Spawning particles is super cheap, and once you spawn them, the rest of
+					// their lifecycle is handled entirely on the GPU, driven by a time uniform updated below
+					particleSystem.spawnParticle(options);
+				}
+			}
+            particleSystem.update(tick);
                 controls.update();
 
-                requestAnimationFrame(animate);
+                
                 //  group1.children[0].geometry.verticesNeedUpdate = true;
 
                 update(clock.getDelta());
