@@ -41,6 +41,11 @@ angular.module('starter', ['ionic', 'ngAnimate'])
     .controller('AppCtrl', ['$scope', '$ionicModal', '$timeout', function ($scope, $ionicModal, $timeout) {
         $scope.showContent = false;
         $timeout(function () {
+            blocker.style.opacity = 0;
+           
+        }, 1000);
+        $timeout(function () {
+            blocker.style.opacity = 0;
             $scope.showContent = true;
         }, 2500);
 
@@ -170,6 +175,7 @@ angular.module('starter', ['ionic', 'ngAnimate'])
                 currentColorRange = [0, 0.3];
 
             var logoImg = document.getElementById("logo-img");
+            var blocker = document.getElementById("blocker");
 
             var controls, controlsEnabled;
             var moveForward,
@@ -198,7 +204,7 @@ angular.module('starter', ['ionic', 'ngAnimate'])
             // 
 
             var r = 30;
-			var rHalf = r / 2;
+            var rHalf = r / 2;
 
             var mouse = new THREE.Vector2();
 
@@ -559,7 +565,7 @@ angular.module('starter', ['ionic', 'ngAnimate'])
 
                 var direction = new THREE.Vector3();
                 camera.position.x = 0;
-                camera.position.z = 2;
+                camera.position.z = 15;
                 camera.position.y =0;
                 scene.fog = new THREE.Fog(0x050505, 500, 4000);
 
@@ -579,41 +585,41 @@ angular.module('starter', ['ionic', 'ngAnimate'])
                 initControls();
 
                  geometry = new THREE.BufferGeometry();
-				 geometry.addAttribute( 'position', new THREE.BufferAttribute( new Float32Array( 4 * 3 ), 3 ) );
+                 geometry.addAttribute( 'position', new THREE.BufferAttribute( new Float32Array( 4 * 3 ), 3 ) );
 
-				 material = new THREE.LineBasicMaterial( { color: 0xffffff, linewidth: 2, transparent: true } );
+                 material = new THREE.LineBasicMaterial( { color: 0xffffff, linewidth: 2, transparent: true } );
 
-				 line = new THREE.Line( geometry, material );
-				 scene.add( line );
+                 line = new THREE.Line( geometry, material );
+                 scene.add( line );
 
                  particleSystem = new THREE.GPUParticleSystem({
-				maxParticles: 250000
-			});
-			scene.add( particleSystem);
+                maxParticles: 250000
+            });
+            scene.add( particleSystem);
             console.log(particleSystem);
 
             
 
-			// options passed during each spawned
-			options = {
-				position: new THREE.Vector3(),
-				positionRandomness: 2,
-				velocity: new THREE.Vector3(),
-				velocityRandomness: 1.46,
-				color: 0xaa88ff,
-				colorRandomness: 1,
-				turbulence: 1,
-				lifetime: 6.5,
-				size: 3,
-				sizeRandomness: 7
-			};
+            // options passed during each spawned
+            options = {
+                position: new THREE.Vector3(),
+                positionRandomness: 2,
+                velocity: new THREE.Vector3(),
+                velocityRandomness: 1.46,
+                color: 0xaa88ff,
+                colorRandomness: 1,
+                turbulence: 1,
+                lifetime: 6.5,
+                size: 3,
+                sizeRandomness: 7
+            };
 
-			spawnerOptions = {
-				spawnRate: 2000,
-				horizontalSpeed: 2,
-				verticalSpeed: 1,
-				timeScale: 0.2
-			};
+            spawnerOptions = {
+                spawnRate: 2000,
+                horizontalSpeed: 2,
+                verticalSpeed: 1,
+                timeScale: 0.2
+            };
 
             geometry = new THREE.SphereGeometry(5);
                     var map = THREE.ImageUtils.loadTexture("img/particle2.png");
@@ -690,62 +696,63 @@ angular.module('starter', ['ionic', 'ngAnimate'])
                 //group2 = THREE.SceneUtils.createMultiMaterialObject(geometry, materials);
                 scene.add(camera);
                 
-                	// geometry
+                    // geometry
 
-				var triangles = 23;
+                var triangles = 23;
 
-			     geometry = new THREE.SphereBufferGeometry();
+                 geometry = new THREE.SphereBufferGeometry();
 
-				var vertices = new Float32Array( triangles * 3 * 3 );
+                var vertices = new Float32Array( triangles * 3 * 3 );
 
-				for ( var i = 0, l = triangles * 3 * 3; i < l; i += 2) {
+                for ( var i = 0, l = triangles * 3 * 3; i < l; i += 2) {
 
-					vertices[ i     ] = Math.random() - 0.5;
-					vertices[ i + 1 ] = Math.random() - 0.5;
-					vertices[ i + 2 ] = Math.random() - 0.5;
+                    vertices[ i     ] = Math.random() - 0.5;
+                    vertices[ i + 1 ] = Math.random() - 0.5;
+                    vertices[ i + 2 ] = Math.random() - 0.5;
                     //var node = new Node(1, 1, 1) ;
 
-				}
+                }
 
-				geometry.addAttribute( 'position', new THREE.BufferAttribute( vertices, 3 ) );
+                geometry.addAttribute( 'position', new THREE.BufferAttribute( vertices, 3 ) );
                 geometry.computeBoundingSphere();
 
-				var colors = new Uint8Array( triangles * 3 * 4 );
+                var colors = new Uint8Array( triangles * 3 * 4 );
 
-				for ( var i = 0, l = triangles * 3 * 4; i < l; i += 2 ) {
+                for ( var i = 0, l = triangles * 3 * 4; i < l; i += 2 ) {
 
-					colors[ i     ] = Math.random() * 255;
-					colors[ i + 1 ] = Math.random() * 255;
-					colors[ i + 2 ] = Math.random() * 255;
-					colors[ i + 3 ] = Math.random() * 255;
+                    // Math.random() * 255
+                    colors[ i     ] = 255;
+                    colors[ i + 1 ] = 255;
+                    colors[ i + 2 ] = 255;
+                    colors[ i + 3 ] = 255;
 
-				}
+                }
 
-				geometry.addAttribute( 'color', new THREE.BufferAttribute( colors, 4, true ) );
+                geometry.addAttribute( 'color', new THREE.BufferAttribute( colors, 4, true ) );
 
-				// material
+                // material
 
-				var material = new THREE.RawShaderMaterial( {
+                var material = new THREE.RawShaderMaterial( {
 
-					uniforms: {
-						time: { value: 1.0 }
-					},
-					vertexShader: document.getElementById( 'vertexShader' ).textContent,
-					fragmentShader: document.getElementById( 'fragmentShader' ).textContent,
-					side: THREE.DoubleSide,
-					transparent: true,
-                    wireframe: false,
+                    uniforms: {
+                        time: { value: 1.0 }
+                    },
+                    vertexShader: document.getElementById( 'vertexShader1' ).textContent,
+                    fragmentShader: document.getElementById( 'fragmentShader1' ).textContent,
+                    side: THREE.SingleSide,
+                    transparent: true,
+                    wireframe: true,
 
-				} );
+                } );
 
-				var mesh = new THREE.Mesh( geometry, material );
+                var mesh = new THREE.Mesh( geometry, material );
                 console.log(mesh);
                 group2 = mesh;
                 console.log(group2);
                 
                 mesh.position.x = 0;
                 mesh.position.y = 0;
-				scene.add( mesh );
+                scene.add( mesh );
                 mesh.geometry.attributes.position.dynamic = true;
                 group2.geometry.attributes.position.dynamic = true;
                 //group2.geometry.attributes.position.normalized = true;
@@ -834,99 +841,99 @@ angular.module('starter', ['ionic', 'ngAnimate'])
                 document.addEventListener('mousemove', onDocumentMouseMove, false);
 
                 controls = new THREE.OrbitControls(camera, renderer.domElement);
-				//controls.addEventListener( 'change', render ); // add this only if there is no animation loop (requestAnimationFrame)
-				controls.enableDamping = true;
-				controls.dampingFactor = 0.25;
-				controls.enableZoom = false;
+                //controls.addEventListener( 'change', render ); // add this only if there is no animation loop (requestAnimationFrame)
+                controls.enableDamping = true;
+                controls.dampingFactor = 0.25;
+                controls.enableZoom = false;
             }
 
             function onDocumentMouseMove( event ) {
 
-				event.preventDefault();
+                event.preventDefault();
 
-				mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-				mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+                mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+                mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 
-				raycaster.setFromCamera( mouse, camera );
+                raycaster.setFromCamera( mouse, camera );
 
-				if ( SELECTED ) {
+                if ( SELECTED ) {
 
-					if ( raycaster.ray.intersectPlane( plane, intersection ) ) {
+                    if ( raycaster.ray.intersectPlane( plane, intersection ) ) {
 
-						SELECTED.position.copy( intersection.sub( offset ) );
+                        SELECTED.position.copy( intersection.sub( offset ) );
 
-					}
+                    }
 
-					return;
+                    return;
 
-				}
+                }
 
-				var intersects = raycaster.intersectObject( group2 );
+                var intersects = raycaster.intersectObject( group2 );
 
-				if ( intersects.length > 0 ) {
+                if ( intersects.length > 0 ) {
 
-					if ( INTERSECTED != intersects[ 0 ].object ) {
+                    if ( INTERSECTED != intersects[ 0 ].object ) {
 
-						if ( INTERSECTED ) INTERSECTED.material.color.setHex( INTERSECTED.currentHex );
+                        if ( INTERSECTED ) INTERSECTED.material.color.setHex( INTERSECTED.currentHex );
 
-						INTERSECTED = intersects[ 0 ].object;
-						//INTERSECTED.currentHex = INTERSECTED.material.color.getHex();
-
-
-
-					}
-
-					container.style.cursor = 'pointer';
-
-				} else {
-
-					//if ( INTERSECTED ) INTERSECTED.material.color.setHex( INTERSECTED.currentHex );
-
-					INTERSECTED = null;
-
-					container.style.cursor = 'auto';
-
-				}
-
-			}
+                        INTERSECTED = intersects[ 0 ].object;
+                        //INTERSECTED.currentHex = INTERSECTED.material.color.getHex();
 
 
-			function onDocumentMouseDown( event ) {
 
-				event.preventDefault();
+                    }
 
-				raycaster.setFromCamera( mouse, camera );
+                    container.style.cursor = 'pointer';
 
-				var intersects = raycaster.intersectObject( group2 );
+                } else {
+
+                    //if ( INTERSECTED ) INTERSECTED.material.color.setHex( INTERSECTED.currentHex );
+
+                    INTERSECTED = null;
+
+                    container.style.cursor = 'auto';
+
+                }
+
+            }
+
+
+            function onDocumentMouseDown( event ) {
+
+                event.preventDefault();
+
+                raycaster.setFromCamera( mouse, camera );
+
+                var intersects = raycaster.intersectObject( group2 );
 
                 console.log(selectedFace);
 
                
-				if ( intersects.length > 0 ) {
+                if ( intersects.length > 0 ) {
                     console.log(intersects);
-					controls.enabled = false;
+                    controls.enabled = false;
 
-					SELECTED = intersects[ 0 ].face;
+                    SELECTED = intersects[ 0 ].face;
                     console.log(SELECTED);
 
-					SELECTED.face.a += mouse.x + 100;
+                    SELECTED.face.a += mouse.x + 100;
                     SELECTED.face.b += mouse.y +100;
                     //SELECTED.uv.x = 500;
                      group2.verticesNeedUpdate = true;
                      group2.verticesNeedUpdating = true;
-                     group2.geometry.attribues.position[SELECTED.faceIndex].x += 400;
+                     group2.geometry.attributes.position[SELECTED.faceIndex].x += 400;
 
-					//offset.copy( intersection ).sub( SELECTED.position );
+                    //offset.copy( intersection ).sub( SELECTED.position );
 
                      group2.updateMatrix();
-					 group2.geometry.computeFaceNormals();
+                     group2.geometry.computeFaceNormals();
                      group2.geometry.computeVertexNormals();
 
-					container.style.cursor = 'move';
+                    container.style.cursor = 'move';
 
-				}
+                }
 
-			}
+            }
 
             function onMouseMove(event) {
 
@@ -952,20 +959,20 @@ angular.module('starter', ['ionic', 'ngAnimate'])
 
             function onMouseClick(event) {
                 mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-				mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+                mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
                 //group1.setPosition(event.pageX, event.pageY);
                 console.log(mouse);
             };
 
             function onDocumentMouseUp( event ) {
 
-				event.preventDefault();
+                event.preventDefault();
 
-				controls.enabled = true;
+                controls.enabled = true;
 
-				container.style.cursor = 'auto';
+                container.style.cursor = 'auto';
 
-			}
+            }
 
             function detectCollisions() {
 
@@ -998,43 +1005,43 @@ angular.module('starter', ['ionic', 'ngAnimate'])
 
                 raycaster.setFromCamera( mouse, camera );
 
-				var intersects = raycaster.intersectObject( group2 );
+                var intersects = raycaster.intersectObject( group2 );
 
-				if ( intersects.length > 0 ) {
+                if ( intersects.length > 0 ) {
 
-					var intersect = intersects[ 0 ];
+                    var intersect = intersects[ 0 ];
                     //console.log(intersect);
-					var face = intersect.face;
+                    var face = intersect.face;
 
-					var linePosition = line.geometry.attributes.position;
-					var meshPosition = group2.geometry.attributes.position;
+                    var linePosition = line.geometry.attributes.position;
+                    var meshPosition = group2.geometry.attributes.position;
 
-					linePosition.copyAt( 0, meshPosition, face.a);
-					linePosition.copyAt( 1, meshPosition, face.b );
-					linePosition.copyAt( 2, meshPosition, face.c );
-					linePosition.copyAt( 3, meshPosition, face.a );
+                    linePosition.copyAt( 0, meshPosition, face.a);
+                    linePosition.copyAt( 1, meshPosition, face.b );
+                    linePosition.copyAt( 2, meshPosition, face.c );
+                    linePosition.copyAt( 3, meshPosition, face.a );
                     meshPosition.x += 500;
 
-					group2.updateMatrix();
+                    group2.updateMatrix();
                     
-					line.geometry.applyMatrix( group2.matrix );
+                    line.geometry.applyMatrix( group2.matrix );
                     selectedFace = face;
                     //console.log(selectedFace);
 
-					line.visible = true;
+                    line.visible = true;
 
                     group2.geometry.computeFaceNormals();
                     group2.geometry.computeVertexNormals();
 
-				} else {
+                } else {
 
-					line.visible = false;
+                    line.visible = false;
 
-				}
+                }
 
 
-group2.geometry.attributes.position.needsUpdate = true;
-    //group2.geometry.attributes.color.needsUpdate = true;
+                group2.geometry.attributes.position.needsUpdate = true;
+                //group2.geometry.attributes.color.needsUpdate = true;
 
                 group2.verticesNeedUpdate = true;
                 group2.verticesNeedUpdating = true;
@@ -1062,21 +1069,21 @@ group2.geometry.attributes.position.needsUpdate = true;
                 
 
                 var delta = clock.getDelta() * spawnerOptions.timeScale;
-			    tick += dt * spawnerOptions.timeScale;
+                tick += dt * spawnerOptions.timeScale;
                 if (tick < 0) tick = 0;
 
-			if (dt > 0) {
-				options.position.x = Math.sin(tick * spawnerOptions.horizontalSpeed) * 20;
-				options.position.y = Math.sin(tick * spawnerOptions.verticalSpeed) * 10;
-				options.position.z = Math.sin(tick * spawnerOptions.horizontalSpeed + spawnerOptions.verticalSpeed) * 5;
+            if (dt > 0) {
+                options.position.x = Math.sin(tick * spawnerOptions.horizontalSpeed) * 20;
+                options.position.y = Math.sin(tick * spawnerOptions.verticalSpeed) * 10;
+                options.position.z = Math.sin(tick * spawnerOptions.horizontalSpeed + spawnerOptions.verticalSpeed) * 5;
 
                 //console.log(options.position);
-				for (var x = 0; x < spawnerOptions.spawnRate * dt; x++) {
-					// Yep, that's really it.	Spawning particles is super cheap, and once you spawn them, the rest of
-					// their lifecycle is handled entirely on the GPU, driven by a time uniform updated below
-					particleSystem.spawnParticle(options);
-				}
-			}
+                for (var x = 0; x < spawnerOptions.spawnRate * dt; x++) {
+                    // Yep, that's really it.    Spawning particles is super cheap, and once you spawn them, the rest of
+                    // their lifecycle is handled entirely on the GPU, driven by a time uniform updated below
+                    particleSystem.spawnParticle(options);
+                }
+            }
             particleSystem.update(tick);
                 controls.update();
 
@@ -1115,11 +1122,11 @@ group2.geometry.attributes.position.needsUpdate = true;
 
                 var time = performance.now();
 
-				//var object = scene.children[  ];
+                //var object = scene.children[  ];
 
-				group2.rotation.y = time * 0.00015;
-                group2.rotation.x = time * 0.00015;
-				group2.material.uniforms.time.value = time * 0.0015;
+                //group2.rotation.y = time * dt;
+                //group2.rotation.x = time * dt;
+                group2.material.uniforms.time.value += time * Math.random();
             }
 
             function resetState () {
